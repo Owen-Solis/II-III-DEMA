@@ -1,0 +1,61 @@
+/* Mantener centrado durante el glitch y sus capas */
+.type-text.glitch,
+.type-text.glitch::before,
+.type-text.glitch::after{
+  display:grid; place-items:center; text-align:center;
+}
+
+/* Glitch RGB split centrado */
+.type-text.glitch{
+  position:relative;
+  animation:glitchShake 450ms steps(8) both;
+}
+.type-text.glitch::before,
+.type-text.glitch::after{
+  content:attr(data-text);
+  position:absolute; inset:0; pointer-events:none;
+}
+.type-text.glitch::before{
+  color:#f00; transform:translate(2px,0); mix-blend-mode:screen;
+  animation:glitchSlice 450ms steps(8) both;
+}
+.type-text.glitch::after{
+  color:#0ff; transform:translate(-2px,0); mix-blend-mode:screen;
+  animation:glitchSlice2 450ms steps(8) both;
+}
+
+/* Flash CRT */
+.flash{
+  position:absolute; inset:0; pointer-events:none; opacity:0; z-index:3;
+  background:
+    radial-gradient(ellipse at center,
+      rgba(255,255,255,1) 0%,
+      rgba(255,255,255,.75) 35%,
+      rgba(255,255,255,.25) 60%,
+      rgba(255,255,255,0) 75%);
+}
+.flash.show{ animation:crtFlash 120ms ease; }
+@keyframes crtFlash{ 0%{opacity:0} 30%{opacity:.95} 100%{opacity:0} }
+
+/* Keyframes del efecto glitch */
+@keyframes glitchShake{
+  0%{transform:translate(0,0)}
+  25%{transform:translate(-2px,1px)}
+  50%{transform:translate(2px,-1px)}
+  75%{transform:translate(-1px,1px)}
+  100%{transform:translate(0,0)}
+}
+@keyframes glitchSlice{
+  0%{clip-path:inset(10% 0 70% 0)}
+  25%{clip-path:inset(35% 0 40% 0)}
+  50%{clip-path:inset(60% 0 15% 0)}
+  75%{clip-path:inset(25% 0 55% 0)}
+  100%{clip-path:inset(10% 0 70% 0)}
+}
+@keyframes glitchSlice2{
+  0%{clip-path:inset(65% 0 10% 0)}
+  25%{clip-path:inset(30% 0 45% 0)}
+  50%{clip-path:inset(12% 0 68% 0)}
+  75%{clip-path:inset(50% 0 25% 0)}
+  100%{clip-path:inset(65% 0 10% 0)}
+}

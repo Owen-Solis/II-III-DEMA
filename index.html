@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>II III DEMA - Ya Disponible en Spotify</title>
+  
+  <!-- Manifest PWA -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Favicon estándar para navegadores modernos -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/dema_icon-32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/img/dema_icon-64.png">
+
+  <!-- Favicon clásico (multi-size) para compatibilidad antigua -->
+  <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
+
+  <!-- Icono para dispositivos Apple (pantalla de inicio iOS/iPadOS) -->
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/dema_icon-180.png">
+
+  <!-- Tema para navegadores móviles -->
+  <meta name="theme-color" content="#0e0f16">
+
+  <!-- Fuentes y estilos -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/glitch.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="canvas" id="canvas">
+      <!-- Imagen base (768×768) -->
+      <svg viewBox="0 0 768 768" aria-label="Imagen interactiva Dema 23">
+        <image href="assets/img/foto_fondo_Dema.jpeg" width="768" height="768" preserveAspectRatio="xMidYMid slice"/>
+
+        <!-- Hotspots izquierda -->
+        <a class="hot" href="#" data-id="left-index"><circle cx="210" cy="300" r="44"></circle></a>
+        <a class="hot" href="#" data-id="left-middle"><circle cx="290" cy="290" r="44"></circle></a>
+
+        <!-- Hotspots derecha -->
+        <a class="hot" href="#" data-id="right-index"><circle cx="465" cy="290" r="44"></circle></a>
+        <a class="hot" href="#" data-id="right-middle"><circle cx="535" cy="290" r="44"></circle></a>
+        <a class="hot" href="#" id="hot-right-ring" data-id="right-ring"><circle cx="580" cy="250" r="42"></circle></a>
+      </svg>
+
+      <!-- Tarjetas -->
+      <div class="card" id="card-left-index"  data-color="#86ffef">
+        <h4>II III DEMA</h4>
+        <a href="https://ejemplo.com/uno" target="_blank" rel="noopener">Abrir</a>
+      </div>
+      <div class="card" id="card-left-middle" data-color="#ffc96b">
+        <h4>b3tter</h4>
+        <a href="https://ejemplo.com/dos" target="_blank" rel="noopener">Abrir</a>
+      </div>
+      <div class="card" id="card-right-index" data-color="#a8b1ff">
+        <h4>Fluir</h4>
+        <a href="https://ejemplo.com/tres" target="_blank" rel="noopener">Abrir</a>
+      </div>
+      <div class="card" id="card-right-middle" data-color="#ff9bba">
+        <h4>Donna Desiderata</h4>
+        <a href="https://ejemplo.com/cuatro" target="_blank" rel="noopener">Abrir</a>
+      </div>
+      <div class="card" id="card-right-ring" data-color="#FFFFFF">
+        <h4>¿?</h4>
+        <a href="https://ejemplo.com/cinco" target="_blank" rel="noopener">Abrir</a>
+      </div>
+    </div>
+
+    <div class="tip">Pasa el cursor o toca cada dedo para ver que sucede !</div>
+  </div>
+
+  <!-- Modal corrupción -->
+  <div id="modal-corrupt" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-box">
+      <button class="modal-close" aria-label="Cerrar" title="Cerrar" data-close>×</button>
+
+      <div class="corrupt">
+        <div class="noise"></div>
+        <div class="scanline"></div>
+
+        <!-- Texto animado -->
+        <div id="typeText" class="type-text"></div>
+
+        <!-- Flash CRT -->
+        <div class="flash" id="flash"></div>
+
+        <!-- Signo de interrogación (final) -->
+        <div class="qm" id="qm">?</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS: primero glitch (lógica), luego app (orquesta) -->
+  <script src="assets/js/glitch.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
