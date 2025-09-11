@@ -1,7 +1,7 @@
 {
-  "name": "Dema 23",
-  "short_name": "Dema23",
-  "description": "Dema II III",
+  "name": "II III DEMA",
+  "short_name": "II III DEMA",
+  "description": "II III DEMA",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0e0f16",
