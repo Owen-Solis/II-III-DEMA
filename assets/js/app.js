@@ -17,6 +17,7 @@
     if(!card) return;
     const a = card.querySelector('a[href]');
     if(a && a.href){
+      // Los dedos abren en nueva pestaña (como tenías)
       window.open(a.href, '_blank', 'noopener');
     }
   }
@@ -123,12 +124,14 @@
     modal.addEventListener('click', (e)=>{ if(e.target.hasAttribute('data-close')) close(); });
     document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') close(); });
 
-    // Click del botón "?"
-    qmEl.addEventListener('click', ()=> window.open(LINK, '_blank', 'noopener'));
+    // Click del botón "?" → abrir en la MISMA pestaña
+    qmEl.addEventListener('click', ()=>{
+      window.location.href = LINK;  // ✅ navega en la misma pestaña
+    });
     qmEl.addEventListener('keydown', (ev)=>{
       if(ev.key === 'Enter' || ev.key === ' '){
         ev.preventDefault();
-        window.open(LINK, '_blank', 'noopener');
+        window.location.href = LINK; // ✅ misma pestaña también por teclado
       }
     });
   })();
