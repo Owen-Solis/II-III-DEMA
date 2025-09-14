@@ -41,47 +41,51 @@ body{
 .modal-box{
   position:absolute;inset:0;margin:auto;width:min(92vw,580px);height:min(74vh,520px);
   border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.2);
-  box-shadow:0 20px 60px rgba(0,0,0,.5);background:#000
+  box-shadow:0 20px 60px rgba(0,0,0,.5);background:#000 !important;
 }
 .modal-close{
   position:absolute;top:8px;right:10px;width:36px;height:36px;border-radius:50%;
   border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.4);
-  color:#fff;font-size:22px;line-height:34px;text-align:center;cursor:pointer;z-index:3
+  color:#fff;font-size:22px;line-height:34px;text-align:center;cursor:pointer;z-index:5
 }
-
-.corrupt{position:absolute;inset:0;background:#000;filter:grayscale(1) contrast(1.25) brightness(1);overflow:hidden}
-.corrupt .noise{
-  position:absolute;inset:-20%;
+.corrupt{position:absolute;inset:0;background:#000 !important;filter:grayscale(1) contrast(1.25) brightness(1);overflow:hidden;z-index:1}
+.corrupt .noise{position:absolute;inset:-20%;
   background:
     radial-gradient(circle at 10% 20%,rgba(255,255,255,.12) 0 2px,transparent 3px) 0 0/6px 6px,
     radial-gradient(circle at 80% 30%,rgba(255,255,255,.08) 0 2px,transparent 3px) 0 0/7px 7px,
     radial-gradient(circle at 30% 70%,rgba(255,255,255,.06) 0 2px,transparent 3px) 0 0/5px 5px;
-  opacity:.35;animation:grain 1.2s steps(2) infinite;pointer-events:none
-}
-.corrupt .scanline{
-  position:absolute;inset:0;
+  opacity:.35;animation:grain 1.2s steps(2) infinite;pointer-events:none;z-index:1}
+.corrupt .scanline{position:absolute;inset:0;
   background:repeating-linear-gradient(to bottom,rgba(255,255,255,.06)0px,rgba(255,255,255,.06)1px,transparent 2px,transparent 4px);
-  mix-blend-mode:screen;opacity:.15;animation:scan 3.2s linear infinite;pointer-events:none
-}
-
-/* Texto animado: base centrada */
+  mix-blend-mode:screen;opacity:.15;animation:scan 3.2s linear infinite;pointer-events:none;z-index:1}
 .type-text{
-  position:absolute; inset:0; display:grid; place-items:center;
-  font-family:monospace; color:#fff; text-align:center;
-  font-size:clamp(28px,5.5vmin,52px); text-transform:uppercase;
-  z-index:2; opacity:0; transition:opacity .25s ease;
+  position:absolute;inset:0;display:grid;place-items:center;
+  font-family:monospace;color:#fff;text-align:center;
+  font-size:clamp(28px,5.5vmin,52px);text-transform:uppercase;
+  z-index:2;opacity:0;transition:opacity .25s ease;
 }
+.flash{
+  position:absolute;inset:0;pointer-events:none;opacity:0;z-index:3;
+  background:radial-gradient(ellipse at center,rgba(255,255,255,1) 0%,rgba(255,255,255,.75) 35%,rgba(255,255,255,.25) 60%,rgba(255,255,255,0) 75%);
+}
+.modal.open .flash{opacity:0}
+.flash.show{animation:crtFlash 120ms ease}
+@keyframes crtFlash{0%{opacity:0}30%{opacity:.95}100%{opacity:0}}
 
-/* Interrogación (final) */
+/* Interrogación */
 .qm{
-  position:absolute; inset:0; display:grid; place-items:center;
-  font-weight:800; font-size:clamp(96px,20vmin,200px); color:#fff;
+  position:absolute;inset:0;display:grid;place-items:center;
+  font-weight:800;font-size:clamp(96px,20vmin,200px);color:#fff;
   text-shadow:0 0 6px rgba(255,255,255,.9),0 0 18px rgba(255,255,255,.65),0 0 36px rgba(255,255,255,.35);
-  z-index:2; pointer-events:none; opacity:0; animation:none; transition:opacity .25s ease;
+  z-index:2;opacity:0;animation:none;
+  appearance:none;-webkit-appearance:none;
+  background:none;border:0;padding:0;margin:0;
+  outline:0;cursor:pointer;
+  transition:opacity .25s ease, text-shadow .25s ease, transform .1s ease;
 }
-.qm.show{ opacity:1; animation:flicker 2.2s infinite steps(20); }
-
-/* Utilidades */
+.qm.show{opacity:1;animation:flicker 2.2s infinite steps(20);}
+.qm:hover{ text-shadow:0 0 12px #fff,0 0 24px #fff,0 0 48px #fff;}
+.qm:active{transform:scale(.98)}
 @keyframes grain{0%{transform:translate(0,0)}50%{transform:translate(-1%,1%)}100%{transform:translate(0,0)}}
 @keyframes scan{0%{transform:translateY(-100%)}100%{transform:translateY(100%)}}
 @keyframes flicker{0%,19%,21%,23%,80%,100%{opacity:1}20%,22%{opacity:.55}81%{opacity:.8}}
