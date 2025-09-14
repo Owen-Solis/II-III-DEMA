@@ -4,21 +4,15 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>II III DEMA - Ya Disponible en Spotify</title>
-  
-  <!-- Manifest PWA -->
-  <link rel="manifest" href="manifest.json">
 
-  <!-- Favicon estándar para navegadores modernos -->
+  <!-- Favicon e íconos -->
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/dema_icon-32.png">
   <link rel="icon" type="image/png" sizes="64x64" href="assets/img/dema_icon-64.png">
-
-  <!-- Favicon clásico (multi-size) para compatibilidad antigua -->
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/dema_icon-180.png">
   <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
 
-  <!-- Icono para dispositivos Apple (pantalla de inicio iOS/iPadOS) -->
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/dema_icon-180.png">
-
-  <!-- Tema para navegadores móviles -->
+  <!-- Manifest PWA -->
+  <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#0e0f16">
 
   <!-- Fuentes y estilos -->
@@ -27,11 +21,10 @@
   <link rel="stylesheet" href="assets/css/styles.css">
   <link rel="stylesheet" href="assets/css/glitch.css">
 </head>
-
 <body>
   <div class="wrap">
     <div class="canvas" id="canvas">
-      <!-- Imagen base (768×768) -->
+      <!-- Imagen base -->
       <svg viewBox="0 0 768 768" aria-label="Imagen interactiva Dema 23">
         <image href="assets/img/foto_fondo_Dema.jpeg" width="768" height="768" preserveAspectRatio="xMidYMid slice"/>
 
@@ -48,27 +41,27 @@
       <!-- Tarjetas -->
       <div class="card" id="card-left-index"  data-color="#86ffef">
         <h4>II III DEMA</h4>
-        <a href="https://ejemplo.com/uno" target="_blank" rel="noopener">Abrir</a>
+        <a href="https://open.spotify.com/intl-es/track/194YNFGQnGX4pEWFB2DkGY?si=72c5728677fe4861" target="_blank" rel="noopener"></a>
       </div>
       <div class="card" id="card-left-middle" data-color="#ffc96b">
         <h4>b3tter</h4>
-        <a href="https://ejemplo.com/dos" target="_blank" rel="noopener">Abrir</a>
+        <a href="https://open.spotify.com/intl-es/track/05g7d5cXi6ybjyEp7Ry9kx?si=6b1d57c51fe142e5" target="_blank" rel="noopener"></a>
       </div>
       <div class="card" id="card-right-index" data-color="#a8b1ff">
         <h4>Fluir</h4>
-        <a href="https://ejemplo.com/tres" target="_blank" rel="noopener">Abrir</a>
+        <a href="https://open.spotify.com/intl-es/track/6lqeg8lW54zj7S2f48PWxL?si=85040a51da104308" target="_blank" rel="noopener"></a>
       </div>
       <div class="card" id="card-right-middle" data-color="#ff9bba">
         <h4>Donna Desiderata</h4>
-        <a href="https://ejemplo.com/cuatro" target="_blank" rel="noopener">Abrir</a>
+        <a href="https://open.spotify.com/intl-es/track/4BNS5QsR4fO2LPOVBTkp5j?si=43cd5a7c62014fa3" target="_blank" rel="noopener"></a>
       </div>
       <div class="card" id="card-right-ring" data-color="#FFFFFF">
-        <h4>¿?</h4>
-        <a href="https://ejemplo.com/cinco" target="_blank" rel="noopener">Abrir</a>
+        <h4>23deMa</h4>
+        <p>¿?</p>
       </div>
     </div>
 
-    <div class="tip">Pasa el cursor o toca cada dedo para ver que sucede !</div>
+    <div class="tip">Da Click o Pasa El Cursor Por Cada Dedo Para Ver Que Pasa!</div>
   </div>
 
   <!-- Modal corrupción -->
@@ -87,13 +80,13 @@
         <!-- Flash CRT -->
         <div class="flash" id="flash"></div>
 
-        <!-- Signo de interrogación (final) -->
-        <div class="qm" id="qm">?</div>
+        <!-- Signo de interrogación (botón clickeable) -->
+        <button class="qm" id="qm" type="button" role="link" data-href="bonus.html">?</button>
       </div>
     </div>
   </div>
 
-  <!-- JS: primero glitch (lógica), luego app (orquesta) -->
+  <!-- JS -->
   <script src="assets/js/glitch.js"></script>
   <script src="assets/js/app.js"></script>
 </body>

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BONUS TRACK</title>
+  <meta name="theme-color" content="#0b0b0f">
+
+  <!-- Favicon (opcional) -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/dema_icon-32.png">
+
+  <link rel="stylesheet" href="assets/css/bonus.css">
+</head>
+<body>
+  <main class="wrap">
+    <!-- Flecha de regreso -->
+    <a href="index.html" class="back-arrow" aria-label="Regresar al inicio">←</a>
+
+    <header class="header">
+      <h1>BONUS TRACK</h1>
+      <p class="subtitle">Reproduce el bonus track exclusivo</p>
+    </header>
+
+    <!-- Player -->
+    <section class="track" id="trackInfo">
+      <div class="meta">
+        <div class="title" id="trackName">23deMa.wav</div>
+        <div class="time">
+          <span id="currentTime">0:00</span> / <span id="totalTime">0:00</span>
+        </div>
+      </div>
+
+      <!-- Controles -->
+      <div class="controls">
+        <button class="pill" id="playBtn" aria-label="Reproducir/Pausar">►</button>
+
+        <input id="seek" class="range" type="range" min="0" max="100" value="0" step="0.1" aria-label="Progreso">
+
+        <div class="volume">
+          <button class="pill small" id="muteBtn" aria-label="Silencio">🔊</button>
+          <input id="vol" class="range vol" type="range" min="0" max="1" step="0.01" value="1" aria-label="Volumen">
+        </div>
+      </div>
+
+      <!-- Visualizador -->
+      <canvas id="viz" width="800" height="80" aria-hidden="true"></canvas>
+    </section>
+  </main>
+
+  <!-- Audio -->
+  <audio id="audio" src="assets/audio/23deMa.wav" preload="metadata"></audio>
+
+  <script src="assets/js/bonus.js"></script>
+</body>
+</html>
