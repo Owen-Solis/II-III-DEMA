@@ -3,16 +3,24 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BONUS TRACK</title>
-  <meta name="theme-color" content="#0b0b0f">
+  <title>////</title>
+  <meta name="theme-color" content="#0a0002">
 
   <!-- Favicon (opcional) -->
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/dema_icon-32.png">
 
   <link rel="stylesheet" href="assets/css/bonus.css">
 </head>
-<body>
-  <!-- Botón de regreso mejorado -->
+<body class="theme-dark">
+  <!-- Fondo tétrico con tu imagen -->
+  <div class="bg bg-red">
+    <img src="assets/img/foto_bonus_Dema.jpg" alt="" aria-hidden="true">
+    <div class="vignette" aria-hidden="true"></div>
+    <div class="scan" aria-hidden="true"></div>
+    <div class="noise" aria-hidden="true"></div>
+  </div>
+
+  <!-- Botón de regreso -->
   <a href="index.html" class="back-arrow" aria-label="Regresar al inicio" title="Regresar al inicio">
     <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
       <path d="M14.7 5.3a1 1 0 0 1 0 1.4L10.41 11H20a1 1 0 1 1 0 2h-9.59l4.3 4.3a1 1 0 0 1-1.42 1.4l-6-6a1 1 0 0 1 0-1.4l6-6a1 1 0 0 1 1.41 0z"/>
@@ -20,35 +28,26 @@
     <span class="label">Inicio</span>
   </a>
 
-  <!-- Fondo blur con imagen -->
-  <div class="bg">
-    <img src="assets/img/foto_fondo_Dema_Efecto.jpg" alt="" aria-hidden="true">
-  </div>
-
   <main class="wrap">
     <header class="header">
-      <h1>BONUS TRACK</h1>
-      <p class="subtitle">Reproduce el bonus track exclusivo</p>
+      <!-- Título dinámico (se regenera en bucle) -->
+      <h1 id="chaosTitle" class="chaos" aria-label="Dema oculto"></h1>
+      <p class="subtitle">reproduce el track oculto</p>
     </header>
 
     <!-- Tarjeta del player -->
     <section class="player-card">
-      <!-- Portada -->
       <div class="cover">
-        <img src="assets/img/foto_fondo_Dema_Efecto.jpg" alt="Portada del track">
+        <img src="assets/img/foto_bonus_Dema.jpg" alt="Portada del track">
         <div class="glow"></div>
       </div>
 
-      <!-- Info + Controles -->
       <div class="stack">
         <div class="meta">
           <div class="title" id="trackName">23deMa.wav</div>
-          <div class="time">
-            <span id="currentTime">0:00</span> / <span id="totalTime">0:00</span>
-          </div>
+          <div class="time"><span id="currentTime">0:00</span> / <span id="totalTime">0:00</span></div>
         </div>
 
-        <!-- Controles -->
         <div class="controls">
           <button class="pill main" id="playBtn" aria-label="Reproducir/Pausar">►</button>
 
@@ -62,15 +61,44 @@
           </div>
         </div>
 
-        <!-- Visualizador -->
         <canvas id="viz" width="800" height="100" aria-hidden="true"></canvas>
       </div>
     </section>
   </main>
 
-  <!-- Audio (oculto) -->
+  <!-- Audio -->
   <audio id="audio" src="assets/audio/23deMa.wav" preload="metadata"></audio>
 
+  <!-- Tu JS del reproductor -->
   <script src="assets/js/bonus.js"></script>
+
+  <!-- Mini script: título de caracteres aleatorios en bucle -->
+  <script>
+    (function(){
+      const el = document.getElementById('chaosTitle');
+      if(!el) return;
+
+      const CHARS = "█▓▒░#%@/\\|[]{}()<>=+*-_~^$&!?0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      const MIN = 14, MAX = 22;          // longitud variable del “título”
+      const SPEED = 60;                  // ms entre cuadros
+      const GLITCH_BEAT = 17;            // cada n ticks, un destello leve
+
+      let tick = 0;
+      function rand(n){ return Math.floor(Math.random()*n); }
+      function randomString(){
+        const len = MIN + rand(MAX - MIN + 1);
+        let out = "";
+        for(let i=0;i<len;i++) out += CHARS[rand(CHARS.length)];
+        return out;
+      }
+      function loop(){
+        tick++;
+        el.textContent = randomString();
+        el.classList.toggle('flash', tick % GLITCH_BEAT === 0);
+        requestAnimationFrame(()=>setTimeout(loop, SPEED));
+      }
+      loop();
+    })();
+  </script>
 </body>
 </html>
