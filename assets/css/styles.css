@@ -1,12 +1,20 @@
 :root{
-  --text:#eef2ff; --line:rgba(255,255,255,.16);
-  --magenta:#ff6bd6; --violeta:#a974ff; --cian:#63d4ff;
+  --text:#eef2ff; 
+  --line:rgba(255,255,255,.16);
+  --magenta:#ff6bd6; 
+  --violeta:#a974ff; 
+  --cian:#63d4ff;
 }
-*{box-sizing:border-box} html,body{height:100%}
+*{box-sizing:border-box}
+html,body{height:100%}
+
 body{
-  margin:0; font-family:Poppins,system-ui,Segoe UI,Roboto,Arial,sans-serif; color:var(--text);
+  margin:0;
+  font-family:Poppins,system-ui,Segoe UI,Roboto,Arial,sans-serif;
+  color:var(--text);
   background:linear-gradient(180deg,var(--magenta)0%,#b056f7 42%,var(--violeta)50%,#7b5af5 58%,var(--cian)100%);
 }
+
 .wrap{min-height:100svh;display:grid;place-items:center;padding:24px}
 
 .canvas{
@@ -16,8 +24,13 @@ body{
 .canvas svg{width:100%;height:100%;display:block}
 
 /* Hotspots */
-.hot circle{fill:transparent;cursor:pointer;transition:filter .25s,stroke .25s,fill .25s;vector-effect:non-scaling-stroke;}
-.hot:hover circle{fill:rgba(255,255,255,.15);stroke:#fff;stroke-width:3;filter:drop-shadow(0 0 8px #fff) drop-shadow(0 0 15px #fff);}
+.hot circle{
+  fill:transparent;cursor:pointer;transition:filter .25s,stroke .25s,fill .25s;vector-effect:non-scaling-stroke;
+}
+.hot:hover circle{
+  fill:rgba(255,255,255,.15);stroke:#fff;stroke-width:3;
+  filter:drop-shadow(0 0 8px #fff) drop-shadow(0 0 15px #fff);
+}
 
 /* Tarjetas */
 .card{
@@ -49,13 +62,15 @@ body{
   color:#fff;font-size:22px;line-height:34px;text-align:center;cursor:pointer;z-index:5
 }
 .corrupt{position:absolute;inset:0;background:#000 !important;filter:grayscale(1) contrast(1.25) brightness(1);overflow:hidden;z-index:1}
-.corrupt .noise{position:absolute;inset:-20%;
+.corrupt .noise{
+  position:absolute;inset:-20%;
   background:
     radial-gradient(circle at 10% 20%,rgba(255,255,255,.12) 0 2px,transparent 3px) 0 0/6px 6px,
     radial-gradient(circle at 80% 30%,rgba(255,255,255,.08) 0 2px,transparent 3px) 0 0/7px 7px,
     radial-gradient(circle at 30% 70%,rgba(255,255,255,.06) 0 2px,transparent 3px) 0 0/5px 5px;
   opacity:.35;animation:grain 1.2s steps(2) infinite;pointer-events:none;z-index:1}
-.corrupt .scanline{position:absolute;inset:0;
+.corrupt .scanline{
+  position:absolute;inset:0;
   background:repeating-linear-gradient(to bottom,rgba(255,255,255,.06)0px,rgba(255,255,255,.06)1px,transparent 2px,transparent 4px);
   mix-blend-mode:screen;opacity:.15;animation:scan 3.2s linear infinite;pointer-events:none;z-index:1}
 .type-text{
@@ -77,10 +92,7 @@ body{
   position:absolute;inset:0;display:grid;place-items:center;
   font-weight:800;font-size:clamp(96px,20vmin,200px);color:#fff;
   text-shadow:0 0 6px rgba(255,255,255,.9),0 0 18px rgba(255,255,255,.65),0 0 36px rgba(255,255,255,.35);
-  z-index:2;opacity:0;animation:none;
-  appearance:none;-webkit-appearance:none;
-  background:none;border:0;padding:0;margin:0;
-  outline:0;cursor:pointer;
+  z-index:2;opacity:0;animation:none;appearance:none;-webkit-appearance:none;background:none;border:0;padding:0;margin:0;outline:0;cursor:pointer;
   transition:opacity .25s ease, text-shadow .25s ease, transform .1s ease;
 }
 .qm.show{opacity:1;animation:flicker 2.2s infinite steps(20);}
@@ -89,3 +101,55 @@ body{
 @keyframes grain{0%{transform:translate(0,0)}50%{transform:translate(-1%,1%)}100%{transform:translate(0,0)}}
 @keyframes scan{0%{transform:translateY(-100%)}100%{transform:translateY(100%)}}
 @keyframes flicker{0%,19%,21%,23%,80%,100%{opacity:1}20%,22%{opacity:.55}81%{opacity:.8}}
+
+/* === Botón flotante (esquina superior derecha) === */
+.socials{
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 9999;
+}
+.social-btn{
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  text-decoration: none;
+  color: #ffffff;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(14,15,22,.82), rgba(12,12,20,.72));
+  backdrop-filter: saturate(1.15) blur(6px);
+  box-shadow: 0 10px 24px rgba(0,0,0,.45);
+  transition: transform .12s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.social-btn svg{
+  display:block;
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+}
+.social-btn.ig{ position: relative; }
+.social-btn.ig::before{
+  content:"";
+  position:absolute; inset:-2px;
+  border-radius: inherit;
+  background: conic-gradient(from 180deg, var(--magenta), var(--violeta), var(--cian), #7b5af5, var(--magenta));
+  filter: blur(6px);
+  opacity: .28;
+  z-index:-1;
+}
+.social-btn:hover,
+.social-btn:focus-visible{
+  border-color: rgba(255,255,255,.28);
+  box-shadow: 0 12px 28px rgba(0,0,0,.55), 0 0 0 6px rgba(123,90,245,.18);
+  transform: translateY(-1px);
+  outline: none;
+}
+.social-btn:active{ transform: translateY(0) scale(.98); }
+
+@media (prefers-reduced-motion: reduce){
+  .social-btn{ transition: none; }
+}
