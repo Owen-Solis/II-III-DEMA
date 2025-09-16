@@ -22,16 +22,35 @@
   <link rel="stylesheet" href="assets/css/glitch.css">
 </head>
 <body>
+
+  <!-- Botón flotante fijo (ESQUINA SUPERIOR DERECHA) -->
+  <div class="socials">
+    <a href="https://www.instagram.com/this._.yule/"
+       target="_blank" rel="noopener"
+       class="social-btn ig"
+       aria-label="Instagram" title="Instagram">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+        <circle cx="12" cy="12" r="4"></circle>
+        <circle cx="18" cy="6" r="1.3"></circle>
+      </svg>
+    </a>
+  </div>
+
   <div class="wrap">
     <div class="canvas" id="canvas">
       <!-- Imagen base -->
       <svg viewBox="0 0 768 768" aria-label="Imagen interactiva Dema 23">
-        <image href="assets/img/foto_fondo_Dema.jpeg" width="768" height="768" preserveAspectRatio="xMidYMid slice"/>
-
+        <!-- href + xlink:href para compatibilidad -->
+        <image
+          href="assets/img/foto_fondo_Dema.jpeg"
+          xlink:href="assets/img/foto_fondo_Dema.jpeg"
+          width="768" height="768"
+          preserveAspectRatio="xMidYMid slice"
+        />
         <!-- Hotspots izquierda -->
         <a class="hot" href="#" data-id="left-index"><circle cx="210" cy="300" r="44"></circle></a>
         <a class="hot" href="#" data-id="left-middle"><circle cx="290" cy="290" r="44"></circle></a>
-
         <!-- Hotspots derecha -->
         <a class="hot" href="#" data-id="right-index"><circle cx="465" cy="290" r="44"></circle></a>
         <a class="hot" href="#" data-id="right-middle"><circle cx="535" cy="290" r="44"></circle></a>
