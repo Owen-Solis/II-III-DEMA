@@ -1,4 +1,4 @@
-/* bonus.js — optimizado para móvil manteniendo estética roja/negra */
+/* bonus.js — optimizado + efecto de letras aleatorias con auto-pause */
 
 (function () {
   const audio = document.getElementById('audio');
@@ -126,11 +126,73 @@
 
   // Pausa animación cuando no está visible
   document.addEventListener('visibilitychange', () => {
-    if (document.hidden) stopViz();
-    else if (isPlaying) startViz();
+    if (document.hidden) {
+      stopViz();
+      pauseChaos();
+    } else {
+      if (isPlaying && !LITE) startViz();
+      if (!LITE) startChaos();
+    }
   });
 
-  // Auto-downgrade si detecta lag
+  // ==============================
+  // Efecto de letras aleatorias 🅒
+  // ==============================
+  const CHAOS_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{};:,./<>?';
+  const CHAOS_FPS = 20; // ≈ 20 fps
+  const CHAOS_INT = 1000 / CHAOS_FPS;
+  const BASE_TEXT = (titleChaos && titleChaos.textContent) || 'BONUS TRACK';
+  let chaosTimer = null;
+  let lastChaos = performance.now();
+
+  function randomizeText(base, chaosProb=0.35){
+    // Reemplaza cada caracter con probabilidad 'chaosProb'
+    let out = '';
+    for (let i=0;i<base.length;i++){
+      const ch = base[i];
+      if (ch === ' '){ out += ' '; continue; }
+      if (Math.random() < chaosProb){
+        const r = CHAOS_CHARS[(Math.random()*CHAOS_CHARS.length)|0];
+        out += r;
+      } else {
+        out += ch;
+      }
+    }
+    return out;
+  }
+
+  function tickChaos(now){
+    if (!titleChaos) return;
+    if ((now - lastChaos) < CHAOS_INT){ chaosTimer = requestAnimationFrame(tickChaos); return; }
+    lastChaos = now;
+
+    // Oscilar intensidad para que sea legible a ratos
+    const t = (now/800) % 2; // 0..2
+    const intensity = t < 1 ? 0.15 + t*0.35 : 0.5 - (t-1)*0.35; // 0.15..0.5..0.15
+    titleChaos.textContent = randomizeText(BASE_TEXT, intensity);
+
+    chaosTimer = requestAnimationFrame(tickChaos);
+  }
+
+  function startChaos(){
+    if (chaosTimer) return;
+    titleChaos && (titleChaos.textContent = BASE_TEXT);
+    lastChaos = performance.now();
+    chaosTimer = requestAnimationFrame(tickChaos);
+  }
+  function pauseChaos(){
+    if (chaosTimer){
+      cancelAnimationFrame(chaosTimer);
+      chaosTimer = null;
+    }
+    // Deja el texto limpio
+    titleChaos && (titleChaos.textContent = BASE_TEXT);
+  }
+
+  // Arranca/pausa según LITE actual
+  if (!LITE) startChaos();
+
+  // Auto-downgrade si detecta lag (y apaga chaos)
   let slow = 0;
   (function watchLag(){
     let prev = performance.now();
@@ -144,8 +206,11 @@
           FFT_SIZE = 256; analyser && (analyser.fftSize = FFT_SIZE);
           SMOOTHING = 0.82; analyser && (analyser.smoothingTimeConstant = SMOOTHING);
           FPS = 24; frameInt = 1000 / FPS;
+          // Pausar el efecto de letras en Lite
+          pauseChaos();
         } else {
-          stopViz(); // ya en lite y aún lento => apaga visualizador
+          // ya en Lite y sigue lento => apaga visualizador
+          stopViz();
         }
         slow = 0;
       }
@@ -154,9 +219,9 @@
     requestAnimationFrame(tick);
   })();
 
-  // Glitch / flash de título (muy barato)
+  // Pequeño flash en el título (barato) para conservar vibe
   setInterval(()=>{
-    titleChaos.classList.toggle('flash');
+    if (!LITE) titleChaos.classList.toggle('flash');
   }, 1400);
 
   // ====== Controles ======
@@ -170,7 +235,7 @@
   audio.addEventListener('play', () => {
     isPlaying = true;
     playBtn.textContent = '❚❚';
-    startViz();
+    if (!LITE) startViz();
   });
   audio.addEventListener('pause', () => {
     isPlaying = false;
