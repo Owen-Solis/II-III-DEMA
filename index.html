@@ -22,16 +22,35 @@
   <link rel="stylesheet" href="assets/css/glitch.css">
 </head>
 <body>
+
+  <!-- Botón flotante fijo (ESQUINA SUPERIOR DERECHA) -->
+  <div class="socials">
+    <a href="https://www.instagram.com/this._.yule/"
+       target="_blank" rel="noopener"
+       class="social-btn ig"
+       aria-label="Instagram" title="Instagram">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+        <circle cx="12" cy="12" r="4"></circle>
+        <circle cx="18" cy="6" r="1.3"></circle>
+      </svg>
+    </a>
+  </div>
+
   <div class="wrap">
     <div class="canvas" id="canvas">
       <!-- Imagen base -->
       <svg viewBox="0 0 768 768" aria-label="Imagen interactiva Dema 23">
-        <image href="assets/img/foto_fondo_Dema.jpeg" width="768" height="768" preserveAspectRatio="xMidYMid slice"/>
-
+        <!-- href + xlink:href para compatibilidad -->
+        <image
+          href="assets/img/foto_fondo_Dema.jpeg"
+          xlink:href="assets/img/foto_fondo_Dema.jpeg"
+          width="768" height="768"
+          preserveAspectRatio="xMidYMid slice"
+        />
         <!-- Hotspots izquierda -->
         <a class="hot" href="#" data-id="left-index"><circle cx="210" cy="300" r="44"></circle></a>
         <a class="hot" href="#" data-id="left-middle"><circle cx="290" cy="290" r="44"></circle></a>
-
         <!-- Hotspots derecha -->
         <a class="hot" href="#" data-id="right-index"><circle cx="465" cy="290" r="44"></circle></a>
         <a class="hot" href="#" data-id="right-middle"><circle cx="535" cy="290" r="44"></circle></a>
@@ -41,23 +60,23 @@
       <!-- Tarjetas -->
       <div class="card" id="card-left-index"  data-color="#86ffef">
         <h4>II III DEMA</h4>
-        <a href="https://open.spotify.com/intl-es/track/194YNFGQnGX4pEWFB2DkGY?si=72c5728677fe4861" target="_blank" rel="noopener"></a>
+        <a href="https://youtu.be/aS0Ph_Mibyw?si=iq0Z2JAP4S4T1ucm" target="_blank" rel="noopener"></a>
       </div>
       <div class="card" id="card-left-middle" data-color="#ffc96b">
         <h4>b3tter</h4>
-        <a href="https://open.spotify.com/intl-es/track/05g7d5cXi6ybjyEp7Ry9kx?si=6b1d57c51fe142e5" target="_blank" rel="noopener"></a>
+        <a href="https://youtu.be/qTvOnBiC74c?si=HN_HcijwfcOZN2AI" target="_blank" rel="noopener"></a>
       </div>
-      <div class="card" id="card-right-index" data-color="#a8b1ff">
+      <div class="card" id="card-right-index" data-color="#721E8A">
         <h4>Fluir</h4>
-        <a href="https://open.spotify.com/intl-es/track/6lqeg8lW54zj7S2f48PWxL?si=85040a51da104308" target="_blank" rel="noopener"></a>
+        <a href="https://youtu.be/qGwhZI-L-8s?si=62NDpJvyMPidohjN" target="_blank" rel="noopener"></a>
       </div>
       <div class="card" id="card-right-middle" data-color="#ff9bba">
         <h4>Donna Desiderata</h4>
-        <a href="https://open.spotify.com/intl-es/track/4BNS5QsR4fO2LPOVBTkp5j?si=43cd5a7c62014fa3" target="_blank" rel="noopener"></a>
+        <a href="https://youtu.be/9KsTcokcyfo?si=l17zBUk1P93JqnAw" target="_blank" rel="noopener"></a>
       </div>
       <div class="card" id="card-right-ring" data-color="#FFFFFF">
-        <h4>23deMa</h4>
-        <p>¿?</p>
+        <h4>||||||||||||||||||||||||||||||||||||||</h4>
+        <p>¿?¿?¡¿?</p>
       </div>
     </div>
 
@@ -81,7 +100,7 @@
         <div class="flash" id="flash"></div>
 
         <!-- Signo de interrogación (botón clickeable) -->
-        <button class="qm" id="qm" type="button" role="link" data-href="bonus.html">?</button>
+        <button class="qm" id="qm" type="button" role="link" data-href="enconstruccion.html">?</button>
       </div>
     </div>
   </div>

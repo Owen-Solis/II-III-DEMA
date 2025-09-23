@@ -1,0 +1,167 @@
+/* ===== Base ===== */
+:root{
+  --bg: url("../img/dema_construccion.jpg");
+  --glass: rgba(8,10,14,.42);
+  --glass-border: rgba(255,255,255,.18);
+  --neon: #86ffef;
+  --neon-2: #ff72d2;
+  --txt: #f7f7f7;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,sans-serif;
+  color:var(--txt);
+  background: var(--bg) center/cover no-repeat fixed;
+}
+
+/* Vignette + grain + scanlines */
+body::before,
+body::after{
+  content:"";
+  position:fixed; inset:0; pointer-events:none;
+}
+body::before{
+  /* viñeta */
+  background:
+    radial-gradient(ellipse at center,
+      rgba(0,0,0,0) 40%, rgba(0,0,0,.4) 100%);
+  mix-blend-mode:multiply;
+}
+body::after{
+  /* grano + scanlines */
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.03) 0 1px, transparent 1px 3px),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/><feComponentTransfer><feFuncA type='table' tableValues='0 0 .08 0'/></feComponentTransfer></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  opacity:.45;
+  mix-blend-mode:overlay;
+}
+
+/* ===== Layout ===== */
+.stage{
+  display:grid;
+  place-content:center;
+  min-height:100dvh;
+  padding: clamp(24px, 4vw, 64px);
+  backdrop-filter: blur(1px);
+}
+
+/* Tarjeta de vidrio */
+.glass{
+  position:relative;
+  padding: clamp(26px, 4vw, 48px) clamp(28px, 6vw, 72px);
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 22px;
+  box-shadow:
+    0 10px 40px rgba(0,0,0,.35),
+    0 0 60px rgba(134,255,239,.08) inset;
+  overflow:hidden;
+}
+
+/* borde neón animado */
+.glass::before{
+  content:"";
+  position:absolute; inset:-2px;
+  border-radius:24px;
+  background:
+    conic-gradient(from 180deg,
+      transparent 0 30%,
+      rgba(134,255,239,.65),
+      rgba(255,114,210,.55),
+      transparent 70% 100%);
+  filter: blur(18px);
+  animation: ring 6s linear infinite;
+  opacity:.8;
+}
+@keyframes ring{to{transform:rotate(360deg)}}
+
+/* brillo barrido */
+.shine{
+  position:absolute; inset:0; pointer-events:none;
+  background:
+    linear-gradient(115deg, transparent 20%, rgba(255,255,255,.22) 50%, transparent 80%);
+  transform: translateX(-120%) skewX(-8deg);
+  animation: sweep 5.5s ease-in-out infinite;
+}
+@keyframes sweep{
+  0%{transform:translateX(-120%) skewX(-8deg)}
+  55%{transform:translateX(120%) skewX(-8deg)}
+  100%{transform:translateX(120%) skewX(-8deg)}
+}
+
+/* ===== Tipografía ===== */
+.title{
+  margin:0 0 .35rem;
+  font-size: clamp(28px, 6vw, 64px);
+  font-weight:700;
+  letter-spacing:.02em;
+  text-align:center;
+  text-shadow:
+    0 0 18px rgba(134,255,239,.35),
+    0 0 36px rgba(255,114,210,.2);
+  filter: drop-shadow(0 2px 10px rgba(0,0,0,.35));
+}
+
+/* Glitch suave en el título */
+.glitch{
+  position:relative; display:inline-block;
+}
+.glitch::before,
+.glitch::after{
+  content:attr(data-text);
+  position:absolute; inset:0;
+  mix-blend-mode:screen;
+}
+.glitch::before{
+  transform: translate(.04em, -.02em);
+  color: var(--neon);
+  clip-path: polygon(0 2%,100% 2%,100% 38%,0 38%);
+  animation: g1 2.8s infinite steps(1, end);
+}
+.glitch::after{
+  transform: translate(-.03em, .02em);
+  color: var(--neon-2);
+  clip-path: polygon(0 62%,100% 62%,100% 98%,0 98%);
+  animation: g2 3.1s infinite steps(1, end);
+}
+@keyframes g1{
+  0%,8%,100%{transform:translate(.04em,-.02em)}
+  9%{transform:translate(.14em,-.06em)}
+  10%{transform:translate(.02em,.02em)}
+}
+@keyframes g2{
+  0%,12%,100%{transform:translate(-.03em,.02em)}
+  13%{transform:translate(-.12em,.06em)}
+  14%{transform:translate(.00em,.00em)}
+}
+
+/* Subtítulo con pulso neón */
+.subtitle{
+  margin:0;
+  text-align:center;
+  font-size: clamp(14px, 2.6vw, 22px);
+  font-weight:300;
+  opacity:.96;
+  letter-spacing:.06em;
+  text-shadow: 0 0 12px rgba(134,255,239,.25);
+  animation: breathe 3.6s ease-in-out infinite;
+}
+.subtitle .amy{
+  font-weight:700;
+  background: linear-gradient(90deg, var(--neon), var(--neon-2));
+  -webkit-background-clip:text; background-clip:text;
+  color: transparent;
+  text-shadow:none;
+}
+@keyframes breathe{
+  0%,100%{filter:drop-shadow(0 0 0 rgba(134,255,239,.0))}
+  50%{filter:drop-shadow(0 0 16px rgba(134,255,239,.45))}
+}
+
+/* Responsivo fino */
+@media (max-width:420px){
+  .glass{padding:22px 22px}
+}

@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 {
   "name": "II III DEMA",
   "short_name": "II III DEMA",
@@ -27,33 +27,4 @@
     }
   ]
 }
-=======
-{
-  "name": "II III DEMA",
-  "short_name": "II III DEMA",
-  "description": "II III DEMA",
-  "start_url": "./index.html",
-  "display": "standalone",
-  "background_color": "#0e0f16",
-  "theme_color": "#0e0f16",
-  "orientation": "portrait",
-  "icons": [
-    {
-      "src": "assets/img/dema_icon-32.png",
-      "sizes": "32x32",
-      "type": "image/png"
-    },
-    {
-      "src": "assets/img/dema_icon-64.png",
-      "sizes": "64x64",
-      "type": "image/png"
-    },
-    {
-      "src": "assets/img/dema_icon-180.png",
-      "sizes": "180x180",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
-  ]
-}
->>>>>>> d03563b (Version 2)
+

@@ -4,51 +4,75 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>BONUS TRACK</title>
-  <meta name="theme-color" content="#0b0b0f">
-
-  <!-- Favicon (opcional) -->
+  <meta name="theme-color" content="#070206">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/dema_icon-32.png">
-
   <link rel="stylesheet" href="assets/css/bonus.css">
 </head>
 <body>
+  <!-- Fondo tétrico con tu imagen -->
+  <div class="bg" aria-hidden="true">
+    <img src="assets/img/foto_bonus_Dema.jpg" alt="">
+    <div class="vignette"></div>
+    <div class="scan"></div>
+    <div class="noise"></div>
+  </div>
+
   <main class="wrap">
-    <!-- Flecha de regreso -->
-    <a href="index.html" class="back-arrow" aria-label="Regresar al inicio">←</a>
+    <!-- Botón regreso -->
+    <a href="index.html" class="back-arrow" aria-label="Regresar al inicio">
+      <svg class="icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+        <path fill="currentColor" d="M14.7 5.3a1 1 0 0 1 0 1.4L10.41 11H20a1 1 0 1 1 0 2h-9.59l4.3 4.3a1 1 0 1 1-1.42 1.4l-6-6a1 1 0 0 1 0-1.4l6-6a1 1 0 0 1 1.41 0z"/>
+      </svg>
+      <span class="label">Inicio</span>
+    </a>
 
     <header class="header">
-      <h1>BONUS TRACK</h1>
+      <h1 class="chaos" id="titleChaos">Qk9OVVMgVFJBQ0sK</h1>
       <p class="subtitle">Reproduce el bonus track exclusivo</p>
     </header>
 
-    <!-- Player -->
-    <section class="track" id="trackInfo">
-      <div class="meta">
-        <div class="title" id="trackName">23deMa.wav</div>
-        <div class="time">
-          <span id="currentTime">0:00</span> / <span id="totalTime">0:00</span>
-        </div>
+    <!-- Tarjeta del reproductor -->
+    <section class="player-card" id="player">
+      <!-- Portada -->
+      <div class="cover">
+        <img src="assets/img/foto_bonus_Dema.jpg" alt="Portada">
+        <div class="glow"></div>
       </div>
 
-      <!-- Controles -->
-      <div class="controls">
-        <button class="pill" id="playBtn" aria-label="Reproducir/Pausar">►</button>
-
-        <input id="seek" class="range" type="range" min="0" max="100" value="0" step="0.1" aria-label="Progreso">
-
-        <div class="volume">
-          <button class="pill small" id="muteBtn" aria-label="Silencio">🔊</button>
-          <input id="vol" class="range vol" type="range" min="0" max="1" step="0.01" value="1" aria-label="Volumen">
+      <!-- Columna derecha -->
+      <div class="stack">
+        <div class="meta">
+          <div class="title" id="trackName">23deMa.wav</div>
+          <div class="time">
+            <span id="currentTime">0:00</span> / <span id="totalTime">0:00</span>
+          </div>
         </div>
-      </div>
 
-      <!-- Visualizador -->
-      <canvas id="viz" width="800" height="80" aria-hidden="true"></canvas>
+        <!-- Controles -->
+        <div class="controls">
+          <button class="pill main" id="playBtn" aria-label="Reproducir/Pausar">►</button>
+
+          <div class="seek-wrap">
+            <input id="seek" class="range" type="range" min="0" max="100" value="0" step="0.1" aria-label="Progreso">
+          </div>
+
+          <div class="volume">
+            <button class="pill small" id="muteBtn" aria-label="Silencio">🔊</button>
+            <input id="vol" class="range vol" type="range" min="0" max="1" step="0.01" value="1" aria-label="Volumen">
+          </div>
+        </div>
+
+        <!-- Visualizador -->
+        <canvas id="viz" width="800" height="110" aria-hidden="true"></canvas>
+
+        <!-- Badge modo Lite -->
+        <div id="liteBadge" class="lite-badge" hidden>Modo Lite activo</div>
+      </div>
     </section>
   </main>
 
-  <!-- Audio -->
-  <audio id="audio" src="assets/audio/23deMa.wav" preload="metadata"></audio>
+  <!-- Audio (sin pre-cargar para ahorrar recursos) -->
+  <audio id="audio" src="assets/audio/23deMa.wav" preload="none"></audio>
 
   <script src="assets/js/bonus.js"></script>
 </body>
